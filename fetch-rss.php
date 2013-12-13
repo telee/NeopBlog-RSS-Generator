@@ -46,6 +46,9 @@
 <rss>
 <channel>
 <?php
+	if ($total > 99) {
+		$total = 99;
+	}
 	//Channel
 	echo '<title>' . $meta_json['blogName'] . '</title>';
 	if ($if_sub_dir) {
