@@ -50,6 +50,7 @@
 	<style type="text/css">
 	body {
 		background: #333;
+		font-family: 'Open Sans', Lucida Grande, Helvetica, Arial, sans-serif, 'STHeiti Pro';
 	}
 	article {
 		background: #FEFEFD;
@@ -69,7 +70,7 @@
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 		$data = curl_exec($curl);
 		curl_close($curl);
-		echo '<article><h2>' . $list_json['list'][$i] . '</h2>' . $data . '</article>';
+		echo '<article><h2>' . $list_json['list'][$i]['postTitle'] . '</h2>' . $data . '</article>';
 	}
 ?>
 </body>
