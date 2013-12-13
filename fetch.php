@@ -1,4 +1,11 @@
 <?php
+	/*
+	* Core file of NeopBlog External RSS Generator
+	* File Name: fetch.php
+	* File Version: 0.6.0
+	* File Staus: Alpha
+	* Developer: Joy Neop
+	*/
 	if (isset($_GET['dir'])) {
 		$path = $_GET['domain'] . '/' . $_GET['dir'];
 	} else {
