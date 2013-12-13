@@ -6,6 +6,8 @@
 
 This generator is written in PHP. And MySQL is needed.
 
+In current situation, maybe the built-in RSS generator of WordPress can be used and a spider is needed.
+
 ## Fetching ##
 
 Set an cron job which make this generator fetch posts every 15 minutes. It will fetch `meta.json` and check if the value of key `totalPosts` is increased, and will fetch `list.json` to index the blog.
@@ -22,4 +24,4 @@ By the time new posts are got, they will be stored in the database, a table whic
 
 ## Showing ##
 
-When the url `index.php?blog=www.joyneop.com` is 	being requested, `index.php` will fetch data from database and and expose the posts as RSS format.
+When the url `index.php?blog=www.joyneop.com` is 	being requested, `index.php` will fetch data from database and and expose the posts in RSS format.
