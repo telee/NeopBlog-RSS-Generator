@@ -44,7 +44,11 @@
 <head>
 	<meta charset="utf-8" />
 	<?php
-		echo '<title>All posts of ' . $meta_json['blogName'] . '</title>';
+		if ($total > 50) {
+			echo '<title>Latest 50 posts of ' . $meta_json['blogName'] . '</title>';
+		} else {
+			echo '<title>All ' . $total . ' posts of ' . $meta_json['blogName'] . '</title>';
+		}
 		echo '<base href="http://' . $path . '/"></base>';
 	?>
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
@@ -76,7 +80,7 @@
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 		$data = curl_exec($curl);
 		curl_close($curl);
-		echo '<section class="post"><h2>' . $list_json['list'][$i]['postTitle'] . '</h2><div class="post-text">' . $data . '</div><footer><a href="./?p=' . $i . '">' . $list_json['list'][$i]['postDate'] . '</a></footer></section>';
+		echo '<section class="post"><h2><a href="./?p=' . $i . '">' . $list_json['list'][$i]['postTitle'] . '</a></h2><div class="post-text">' . $data . '</div><footer><a href="./?p=' . $i . '">' . $list_json['list'][$i]['postDate'] . '</a></footer></section>';
 	}
 ?>
 </div>
