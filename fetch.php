@@ -31,7 +31,7 @@
 	//If fetching RSS is allowed
 
 	if ($meta_json['rss'] == "off") {
-		die("This blog doesn't allow generator RSS");
+		die("This blog doesn't allow generating RSS");
 	}
 
 	//Get list
