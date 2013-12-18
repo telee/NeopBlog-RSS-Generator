@@ -2,7 +2,7 @@
 	/*
 	* Core file of NeopBlog External RSS Generator
 	* File Name: fetch-rss.php
-	* File Version: 0.6.0
+	* File Version: 0.6.1
 	* File Staus: Alpha
 	* Developer: Joy Neop
 	*/
@@ -42,15 +42,7 @@
 
 ?>
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0"
-	xmlns:content="http://purl.org/rss/1.0/modules/content/"
-	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
-	xmlns:dc="http://purl.org/dc/elements/1.1/"
-	xmlns:atom="http://www.w3.org/2005/Atom"
-	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
-	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
-	>
-<rss>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/">
 <channel>
 <?php
 	if ($total > 99) {
@@ -67,7 +59,8 @@
 	echo '<language>en-US</language><sy:updatePeriod>hourly</sy:updatePeriod><sy:updateFrequency>1</sy:updateFrequency>';
 	echo '<generator>http://app.joyneop.com/nb-rss/?v=3.7.1</generator>';
 	//Items
-	for ($i=$total-1; $i >= 0; $i--) { 
+	//for ($i=$total-1; $i >= 0; $i--) { 
+	for ($i=9; $i >= 0; $i--) { 
 		$curl = curl_init();
 		$post_url = 'http://neop.me/blog/db/' . $i . '.txt';
 		curl_setopt($curl, CURLOPT_URL, $post_url);

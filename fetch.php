@@ -7,7 +7,11 @@
 	* Developer: Joy Neop
 	*/
 	if (isset($_GET['dir'])) {
-		$path = $_GET['domain'] . '/' . $_GET['dir'];
+		if ($_GET['dir'] == '') {
+			$path = $_GET['domain'];
+		} else {
+			$path = $_GET['domain'] . '/' . $_GET['dir'];
+		}
 	} else {
 		$path = $_GET['domain'];
 	}
@@ -23,6 +27,12 @@
 
 	$meta_json = json_decode($meta_info, true);
 	$total = $meta_json['totalPosts'];
+
+	//If fetching RSS is allowed
+
+	if ($meta_json['rss'] == "off") {
+		die("This blog doesn't allow generator RSS");
+	}
 
 	//Get list
 
@@ -72,12 +82,12 @@
 	if ($total > 50) {
 		$total = 50;
 	}
+	$curl = curl_init();
+	curl_setopt($curl, CURLOPT_HEADER, 0);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 	for ($i=$total-1; $i >= 0; $i--) { 
-		$curl = curl_init();
 		$post_url = 'http://' . $path . '/db/' . $i . '.txt';
 		curl_setopt($curl, CURLOPT_URL, $post_url);
-		curl_setopt($curl, CURLOPT_HEADER, 0);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 		$data = curl_exec($curl);
 		curl_close($curl);
 		echo '<section class="post"><h2><a href="./?p=' . $i . '">' . $list_json['list'][$i]['postTitle'] . '</a></h2><div class="post-text">' . $data . '</div><footer><a href="./?p=' . $i . '">' . $list_json['list'][$i]['postDate'] . '</a></footer></section>';

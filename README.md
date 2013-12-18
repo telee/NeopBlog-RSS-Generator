@@ -1,26 +1,12 @@
 # NeopBlog RSS Generator — Foresee #
 
-**NeopBlog** is a static blog CMS developed by **Joy Neop**. It doesn’t have RSS therefore an external RSS generator is needed.
-
-## Preview ##
-
-This generator is written in PHP. And MySQL is needed.
-
-In current situation, maybe the built-in RSS generator of WordPress can be used and a spider is needed.
+**NeopBlog** is a static blog CMS developed by **Joy Neop**. It doesn’t have RSS therefore an external RSS generator is needed. http://blog.joyneop.com/
 
 ## Fetching ##
 
-Set an cron job which make this generator fetch posts every 15 minutes. It will fetch `meta.json` and check if the value of key `totalPosts` is increased, and will fetch `list.json` to index the blog.
+This generator fetches the latest posts, at most 50 posts once. Because it doesn’t have database to cache, instead, it fetches posts by the time the generator is queried.
 
-For example, you have 42 posts initially, when you update your `meta.json`, this generator will know that you have a new post and will calculate how many posts are new to be fetched.
-
-After last fetching, if you added 3 posts, the value of key `totalPosts` in `meta.json` should be `45`. In this generator’s database, the previous number is 42, so it knows that there are 3 posts new.
-
-Then in a looping, this generator will fetch `db/42.txt`, `db/43.txt` and `db/44.txt`. And the post title and post date included in `list.json` is associated.
-
-## Saving ##
-
-By the time new posts are got, they will be stored in the database, a table which contains columns `ID`, `Date`, `Title` and `Text`.
+This generator will get the `meta.json` of the blog and find out how many posts does the blog have. And will list out the latest 50 posts if the value of key `totalPosts` is greater than 50.
 
 ## Showing ##
 
