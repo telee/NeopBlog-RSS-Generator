@@ -24,7 +24,7 @@ When the url `index.php?blog=www.joyneop.com` is 	being requested, `index.php` w
 
 ## License ##
 
-This program is private but will be released with *CC BY-NC-SA 4.0* license after completion.
+This program is private but will be released with **CC BY-NC-SA 4.0** license after completion.
 
 ## Credits ##
 
