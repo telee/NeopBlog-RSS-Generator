@@ -2,16 +2,12 @@
 	/*
 	* Core file of NeopBlog External RSS Generator
 	* File Name: fetch.php
-	* File Version: 0.6.0
+	* File Version: 0.6.7
 	* File Staus: Alpha
 	* Developer: Joy Neop
 	*/
 	if (isset($_GET['dir'])) {
-		if ($_GET['dir'] == '') {
-			$path = $_GET['domain'];
-		} else {
-			$path = $_GET['domain'] . '/' . $_GET['dir'];
-		}
+		$path = $_GET['domain'] . '/' . $_GET['dir'];
 	} else {
 		$path = $_GET['domain'];
 	}
@@ -28,10 +24,10 @@
 	$meta_json = json_decode($meta_info, true);
 	$total = $meta_json['totalPosts'];
 
-	//If fetching RSS is allowed
+	//If allowed to fetch
 
 	if ($meta_json['rss'] == "off") {
-		die("This blog doesn't allow generating RSS");
+		die("This blog does not allow fetching feed");
 	}
 
 	//Get list
@@ -86,16 +82,21 @@
 	curl_setopt($curl, CURLOPT_HEADER, 0);
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 	for ($i=$total-1; $i >= 0; $i--) { 
+		
 		$post_url = 'http://' . $path . '/db/' . $i . '.txt';
 		curl_setopt($curl, CURLOPT_URL, $post_url);
 		$data = curl_exec($curl);
-		curl_close($curl);
-		echo '<section class="post"><h2><a href="./?p=' . $i . '">' . $list_json['list'][$i]['postTitle'] . '</a></h2><div class="post-text">' . $data . '</div><footer><a href="./?p=' . $i . '">' . $list_json['list'][$i]['postDate'] . '</a></footer></section>';
+		echo '<section class="post"><h2><a class="post-title" href="./?p=' . $i . '">' . $list_json['list'][$i]['postTitle'] . '</a></h2>';
+		echo '<div class="post-text">' . $data . '</div>';
+		echo '<footer><a href="./?p=' . $i . '">' . $list_json['list'][$i]['postDate'] . '</a></footer></section>';
 	}
+	curl_close($curl);
 ?>
 </div>
 <footer id="global-header" class="global">
-	<a href="<?php echo 'http://' . $path; ?>">&copy; 2013 All Rights Reserved by <?php echo $meta_json['blogName']; ?></a>
+	<?php
+		echo '<a href="http://' . $path . '">&copy; 2013 All Rights Reserved by ' . $meta_json['blogName'] . '</a>';
+	?>
 </footer>
 </body>
 </html>
